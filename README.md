@@ -1,3 +1,87 @@
+# NewsApp
+A React Native application to display news articles using custom components and FlatList.
+
+## Description
+NewsApp is a simple application that showcases news articles using custom components and the FlatList component in React Native. It also features a horizontal scrolling banner for highlighting news.
+
+## Features
+- Display news articles with a title, description, and author.
+- Horizontal scrolling banner for featured news.
+- Uses custom components for better code organization and reusability.
+
+   import {Image, ScrollView} from 'react-native';
+   import React from 'react';
+   import styles from './styles';
+   import news_banner_data from '../../../news_banner_data.json';
+   
+   const HorizontalNewsCard = () => {
+     return (
+       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+         {news_banner_data.map(bannerNews => (
+           <Image
+             key={bannerNews.id}
+             style={styles.banner_image}
+             source={{uri: bannerNews.imageUrl}}
+           />
+         ))}
+       </ScrollView>
+     );
+   };
+   
+   export default HorizontalNewsCard;
+
+
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import styles from './styles';
+
+const NewsCard = (props) => {
+  return (
+    <View style={styles.container}>
+      <Image style={styles.image} source={{uri: props.news.imageUrl}} />
+      <View style={styles.innerContainer}>
+        <Text style={styles.title}>{props.news.title}</Text>
+        <Text style={styles.description}>{props.news.description}</Text>
+        <Text style={styles.author}>{props.news.author}</Text>
+      </View>
+    </View>
+  );
+};
+
+export default NewsCard;
+
+
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+} from 'react-native';
+import React from 'react';
+import styles from './styles';
+import news_data from '../../../news_data.json';
+import {NewsCard, HorizontalNewsCard} from '../../components/index';
+
+const App = () => {
+  const renderNews = ({item}) => <NewsCard news={item} />;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.headerText}>News</Text>
+      <FlatList
+        ListHeaderComponent={() => <HorizontalNewsCard />}
+        keyExtractor={item => item.u_id.toString()}
+        data={news_data}
+        renderItem={renderNews}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default App;
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
