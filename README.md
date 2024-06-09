@@ -9,75 +9,7 @@ NewsApp is a simple application that showcases news articles using custom compon
 - Horizontal scrolling banner for featured news.
 - Uses custom components for better code organization and reusability.
 
-   import {Image, ScrollView} from 'react-native';
-   import React from 'react';
-   import styles from './styles';
-   import news_banner_data from '../../../news_banner_data.json';
    
-   const HorizontalNewsCard = () => {
-     return (
-       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-         {news_banner_data.map(bannerNews => (
-           <Image
-             key={bannerNews.id}
-             style={styles.banner_image}
-             source={{uri: bannerNews.imageUrl}}
-           />
-         ))}
-       </ScrollView>
-     );
-   };
-   
-   export default HorizontalNewsCard;
-
-
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import styles from './styles';
-
-const NewsCard = (props) => {
-  return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{uri: props.news.imageUrl}} />
-      <View style={styles.innerContainer}>
-        <Text style={styles.title}>{props.news.title}</Text>
-        <Text style={styles.description}>{props.news.description}</Text>
-        <Text style={styles.author}>{props.news.author}</Text>
-      </View>
-    </View>
-  );
-};
-
-export default NewsCard;
-
-
-import {
-  SafeAreaView,
-  Text,
-  FlatList,
-} from 'react-native';
-import React from 'react';
-import styles from './styles';
-import news_data from '../../../news_data.json';
-import {NewsCard, HorizontalNewsCard} from '../../components/index';
-
-const App = () => {
-  const renderNews = ({item}) => <NewsCard news={item} />;
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>News</Text>
-      <FlatList
-        ListHeaderComponent={() => <HorizontalNewsCard />}
-        keyExtractor={item => item.u_id.toString()}
-        data={news_data}
-        renderItem={renderNews}
-      />
-    </SafeAreaView>
-  );
-};
-
-export default App;
 
 
 
@@ -161,3 +93,8 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Screenshots
+![Screenshot_20240609_135815](https://github.com/akgullberk/News-App-React-Native/assets/108866525/8e399fc9-7cb1-4bb6-a214-b855ba1b3a79)
+
+[Screen_recording_20240609_135841.webm](https://github.com/akgullberk/News-App-React-Native/assets/108866525/6bdf8e5f-c219-4bb2-9068-e3f6c3a3ba8b)
+
